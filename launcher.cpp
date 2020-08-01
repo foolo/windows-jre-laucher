@@ -1,3 +1,7 @@
+#define CLASSNAME      L"my.package.MyApplication"
+#define JAVAPATH       L"jre\\bin\\java.exe"
+#define ARGS           L"--class-path \"lib/*\"" CLASSNAME
+
 #include <windows.h>
 #include <sstream>
 #include <shlwapi.h>
@@ -20,8 +24,8 @@ int main() {
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
-	LPCWSTR cmd = L"jre\\bin\\java.exe";
-	WCHAR args[] = L"jre\\bin\\java.exe --class-path \"lib/*\" my.package.MyApplication";
+	LPCWSTR cmd = JAVAPATH;
+	WCHAR args[] = JAVAPATH ARGS;
 	if (CreateProcessW(cmd, args, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi) == 0) {
 		std::wstringstream ss;
 		ss << "Could not run " << cmd << std::endl;
