@@ -19,9 +19,9 @@ When the user launches myapp.exe, it will launch your Java application with the 
 
 # Usage instructions
 
-Edit the first line in **launcher.cpp**: ```#define CLASSNAME      L"com.example.MyApplication"``` and replace ```com.example.MyApplication``` with the name of your main Java class (the class that has the ```main``` method)
+Locate the line starting with ```#define ARGS``` at the top of **launcher.cpp**. Replace ```com.example.MyApplication``` with the name of your main Java class (the class that has the ```main``` method). Make any other configurations you need, for example by adding directories to the classpath, or by adding additional arguments to the call to **java.exe**.
 
-If needed, you can also configure the ```JAVAPATH``` and ```ARGS``` defines, for example if your JRE is in a different directory than **jre/**, or if you want to change the classpath or add additional arguments to the call to **java.exe**.
+You can also configure the ```JAVAPATH``` define if your JRE is in a different directory than **jre/**.
 
 You can replace **icon.ico** with your own icon, or if you don't want to use an icon, just remove the things related to resources.res from the commands below.
 
