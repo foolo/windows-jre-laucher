@@ -1,4 +1,4 @@
-#define CLASSNAME      L"my.package.MyApplication"
+#define CLASSNAME      L"com.example.MyApplication"
 #define JAVAPATH       L"jre\\bin\\java.exe"
 #define ARGS           L"--class-path \"lib/*\"" CLASSNAME
 
