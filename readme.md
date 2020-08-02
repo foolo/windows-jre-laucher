@@ -32,7 +32,7 @@ You can replace **icon.ico** with your own icon, or if you don't want to use an 
     ```
     CL /O1 /EHsc -c launcher.cpp
     RC /fo resources.res resources.rc
-    LINK /OUT:launcher.exe launcher.obj resources.res user32.lib shlwapi.lib
+    LINK /OUT:launcher.exe /SUBSYSTEM:WINDOWS /ENTRY:"mainCRTStartup" launcher.obj resources.res user32.lib shlwapi.lib
     ```
 
 * On Linux, using Mingw-w64 toolchain
