@@ -15,11 +15,13 @@ my_project/
         ...           # any third-party libraries, etc.
 ```
 
-When the user launches myapp.exe, it will launch your Java application with the bundled JRE, with a command that looks like ```jre\bin\java.exe --class-path "lib/*" my.package.MyApplication```
+When the user launches myapp.exe, it will launch your Java application with the bundled JRE, with a command that looks like ```jre\bin\java.exe --class-path "lib/*" com.example.MyApplication```. You can configure the command line in **launcher.cpp**, as described below-
 
 # Usage instructions
 
-Edit the first line in **launcher.cpp**: ```#define CLASSNAME      L"my.package.MyApplication"``` and replace ```my.package.MyApplication``` with the name of your main Java class (the class that has the ```main``` method)
+Edit the first line in **launcher.cpp**: ```#define CLASSNAME      L"com.example.MyApplication"``` and replace ```com.example.MyApplication``` with the name of your main Java class (the class that has the ```main``` method)
+
+If needed, you can also configure the ```JAVAPATH``` and ```ARGS``` defines, for example if your JRE is in a different directory than **jre/**, or if you want to change the classpath or add additional arguments to the call to **java.exe**.
 
 You can replace **icon.ico** with your own icon, or if you don't want to use an icon, just remove the things related to resources.res from the commands below.
 
@@ -35,7 +37,7 @@ You can replace **icon.ico** with your own icon, or if you don't want to use an 
 
 * On Linux, using Mingw-w64 toolchain
 
-    It is possible to cross-compile the Windows executable from Linux, using the x86_64-w64-mingw32 toolchain, although this will generate a larger executable (around 800 kb). On Ubuntu the toolchain can be installed with ```sudo apt install g++-mingw-w64-x86-64```.
+    It is possible to cross-compile the Windows executable from Linux, using the x86_64-w64-mingw32 toolchain, although this will generate a larger executable (around 800 kb). On Ubuntu, the toolchain can be installed with ```sudo apt install g++-mingw-w64-x86-64```.
 
     ```
     x86_64-w64-mingw32-g++ -o launcher.o -c launcher.cpp
