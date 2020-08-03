@@ -58,3 +58,8 @@ You can replace **icon.ico** with your own icon, or if you don't want to use an 
     ```
 
 You will now have a file called **launcher.exe**, which you can rename to suit your own project.
+
+
+# Example application
+
+You can find an example of how a deployed application might look like under [releases](https://github.com/foolo/windows-jre-laucher/releases)
