@@ -2,7 +2,7 @@
 
 This project is a tool for creating a Windows executable that launches a Java application which is bundled with a JRE.
 
-The generated exe-file is around 200 kb if compiled with MSVC, and will normally not need to be updated unless you rename your main Java class or change the application icon. That means that the most convenient probably is to add the compiled exe-file to your project's Git repository and just include in the package when generating a release-bundle, but you can of course also add the compilation step as a part of the build process.
+The generated exe-file is around 30 kb if compiled with Mingw-w64 toolchain, and 110 kb if compiled with MSVC, and will normally not need to be updated unless you rename your main Java class or change the application icon. That means that the most convenient probably is to add the compiled exe-file to your project's Git repository and just include in the package when generating a release-bundle, but you can of course also add the compilation step as a part of the build process.
 
 The file structure of the deployed Java application would typically look something like this
 
@@ -27,7 +27,19 @@ You can replace **icon.ico** with your own icon, or if you don't want to use an 
 
 ## Compile the executable:
 
+* On Windows, using Mingw-w64
+
+    Install MSYS2 tools from https://www.msys2.org/, open the MinGW 64-bit terminal and run
+
+    ```
+    g++ -o launcher.o -c launcher.cpp
+    windres resources.rc --output-format=coff --output=resources.res
+    g++ -o launcher.exe -static -s -mwindows launcher.o resources.res -lshlwapi
+    ```
+
 * On Windows, using MSVC command line tools
+
+    Open the Developer Command Prompt for Visual Studio and run:
 
     ```
     CL /O1 /EHsc -c launcher.cpp
@@ -37,7 +49,7 @@ You can replace **icon.ico** with your own icon, or if you don't want to use an 
 
 * On Linux, using Mingw-w64 toolchain
 
-    It is possible to cross-compile the Windows executable from Linux, using the x86_64-w64-mingw32 toolchain, although this will generate a larger executable (around 800 kb). On Ubuntu, the toolchain can be installed with ```sudo apt install g++-mingw-w64-x86-64```.
+    It is possible to cross-compile the Windows executable from Linux, using the x86_64-w64-mingw32 toolchain. On Ubuntu, the toolchain can be installed with ```sudo apt install g++-mingw-w64-x86-64```.
 
     ```
     x86_64-w64-mingw32-g++ -o launcher.o -c launcher.cpp
