@@ -2,8 +2,10 @@
 #define ARGS           L"--class-path lib/*;. com.example.MyApplication"
 
 #include <windows.h>
-#include <sstream>
+#include <stdio.h>
 #include <shlwapi.h>
+#define BUFSIZE 512
+wchar_t buf[BUFSIZE];
 
 void cdToApplication() {
 	wchar_t path[MAX_PATH];
@@ -26,11 +28,8 @@ int main() {
 	LPCWSTR cmd = JAVAPATH;
 	WCHAR args[] = JAVAPATH L" " ARGS;
 	if (CreateProcessW(cmd, args, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi) == 0) {
-		std::wstringstream ss;
-		ss << "Could not run " << cmd << std::endl;
-		ss << "error code: " << GetLastError() << std::endl;
-		ss << "command line: " << args << std::endl;
-		MessageBoxExW(NULL, ss.str().c_str(), L"Message", MB_OK | MB_ICONERROR, 0);
+		swprintf_s( buf, BUFSIZE, L"Could not run %s\nerror code: %lu\ncommand line: %s", cmd, GetLastError(), args );
+		MessageBoxExW(NULL, buf, L"Message", MB_OK | MB_ICONERROR, 0);
 		return 0;
 	}
 
@@ -38,19 +37,13 @@ int main() {
 	DWORD exitCode = 0;
 	if (GetExitCodeProcess(pi.hProcess, &exitCode) != 0) {
 		if (exitCode != 0) {
-			std::wstringstream ss;
-			ss << cmd << std::endl;
-			ss << "failed with exit code " << exitCode << std::endl;
-			ss << "command line: " << args << std::endl;
-			MessageBoxExW(NULL, ss.str().c_str(), L"Message", MB_OK | MB_ICONERROR, 0);
+			swprintf_s( buf, BUFSIZE, L"%s\nfailed with exit code %lu\ncommand line: %s", cmd, exitCode, args );
+			MessageBoxExW(NULL, buf, L"Message", MB_OK | MB_ICONERROR, 0);
 		}
 	}
 	else {
-		std::wstringstream ss;
-		ss << cmd << std::endl;
-		ss << "terminated with unknown exit code" << std::endl;
-		ss << "command line: " << args << std::endl;
-		MessageBoxExW(NULL, ss.str().c_str(), L"Message", MB_OK | MB_ICONERROR, 0);
+		swprintf_s( buf, BUFSIZE, L"%s\nterminated with unknown exit code\ncommand line: %s", cmd, args );
+		MessageBoxExW(NULL, buf, L"Message", MB_OK | MB_ICONERROR, 0);
 	}
 
 	CloseHandle(pi.hProcess);
