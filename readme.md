@@ -15,7 +15,7 @@ my_project/
         ...           # any third-party libraries, etc.
 ```
 
-When the user launches myapp.exe, it will launch your Java application with the bundled JRE, with a command that looks like ```jre\bin\java.exe --class-path "lib/*" com.example.MyApplication```. You can configure the command line in **launcher.cpp**, as described below-
+When the user launches myapp.exe, it will launch your Java application with the bundled JRE, with a command that looks like ```jre\bin\java.exe --class-path "lib/*" com.example.MyApplication```. You can configure the command line in **launcher.cpp**, as described below.
 
 # Usage instructions
 
