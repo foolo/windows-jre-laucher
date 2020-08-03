@@ -1,5 +1,5 @@
 #define JAVAPATH       L"jre\\bin\\java.exe"
-#define ARGS           L"--class-path lib/*;. com.example.MyApplication"
+#define ARGS           L"--class-path lib/*;* com.example.MyApplication"
 
 #include <windows.h>
 #include <stdio.h>
